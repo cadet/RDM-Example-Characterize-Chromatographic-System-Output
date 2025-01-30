@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "C:\Users\katha\miniforge3\envs\rdm_example_conda\lib\site-packages\cadetrdm\repositories.py", line 1252, in track_results
+    yield new_branch_name
+  File "C:\Users\katha\miniforge3\envs\rdm_example_conda\lib\site-packages\cadetrdm\wrapper.py", line 38, in wrapper
+    results = func(project_repo, options)
+  File "C:\Users\katha\Dokumente\cadet_case_studies\Example_4\main.py", line 182, in main
+    create_output(
+  File "C:\Users\katha\Dokumente\cadet_case_studies\Example_4\main.py", line 118, in create_output
+    shutil.copytree(root_path, output_path)
+  File "C:\Users\katha\miniforge3\envs\rdm_example_conda\lib\shutil.py", line 559, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+  File "C:\Users\katha\miniforge3\envs\rdm_example_conda\lib\shutil.py", line 457, in _copytree
+    os.makedirs(dst, exist_ok=dirs_exist_ok)
+  File "C:\Users\katha\miniforge3\envs\rdm_example_conda\lib\os.py", line 225, in makedirs
+    mkdir(name, mode)
+FileExistsError: [WinError 183] Eine Datei kann nicht erstellt werden, wenn sie bereits vorhanden ist: 'C:\\Users\\katha\\Dokumente\\cadet_case_studies\\Example_4\\output\\src'
+
