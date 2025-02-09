@@ -1,0 +1,11 @@
+name: rdm_example
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - cadet
+  - jupyterlab
+  - jupyterlab-myst
+  - pip
+  - python=3.10
+prefix: C:\Users\katha\miniforge3\envs\rdm_example
