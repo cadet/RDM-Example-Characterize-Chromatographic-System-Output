@@ -7,4 +7,4 @@ Please add a description here including:
 
 
 The project repository can be found at:
-[project_repo](https://github.com/katharinapaul2403/CADET-RDM_Example_4)
+[project_repo](https://github.com/cadet/RDM-Example-Characterize-Chromatographic-System)
