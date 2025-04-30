@@ -1,0 +1,11 @@
+name: rdm_example
+channels:
+  - conda-forge
+dependencies:
+  - jupyterlab
+  - python=3.11
+  - jupyterlab-myst
+  - pip
+  - cadet
+  - git-lfs
+prefix: /home/IBT/jaepel/miniforge3/envs/rdm_example

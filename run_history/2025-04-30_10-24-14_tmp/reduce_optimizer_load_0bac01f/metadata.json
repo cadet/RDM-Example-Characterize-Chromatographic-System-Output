@@ -1,0 +1,13 @@
+{
+  "output_repo_commit_message": "Run small optimizations; ",
+  "output_repo_branch": "2025-04-30_10-24-14_tmp/reduce_optimizer_load_0bac01f",
+  "output_repo_commit_hash": "e89ebef2122a4745edcba7ab2ba5242184de579e",
+  "project_repo_commit_hash": "0bac01f13fac06ead3b8bbe2726733e5a3203f5b",
+  "project_repo_folder_name": "RDM-Example-Characterize-Chromatographic-System",
+  "project_repo_remotes": [
+    "git@github.com:cadet/RDM-Example-Characterize-Chromatographic-System.git"
+  ],
+  "python_sys_args": "['main.py']",
+  "tags": "",
+  "options_hash": "xsacyrswdex3ed1c0765224ke794n865"
+}
