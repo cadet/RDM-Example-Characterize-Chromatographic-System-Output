@@ -7,3 +7,5 @@ Each simulation run creates a dedicated branch in this output repository. The re
 ## Project Repository
 The project repository for this case study is available here: <br>
 [Link to Project Repository](https://github.com/cadet/RDM-Example-Characterize-Chromatographic-System)
+The output repo can be found at:
+[project_repo](https://github.com/cadet/RDM-Example-Characterize-Chromatographic-System)
