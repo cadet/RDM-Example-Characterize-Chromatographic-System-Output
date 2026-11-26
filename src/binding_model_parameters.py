@@ -353,16 +353,18 @@ if __name__ == "__main__":
 # %%
 if __name__ == "__main__":
     from CADETProcess.optimization import U_NSGA3
-optimizer = U_NSGA3()
-optimizer.n_max_gen = 3
-optimizer.pop_size = 3
-optimizer.n_cores = 3
+
+    optimizer = U_NSGA3()
+    optimizer.n_max_gen = 60
+    optimizer.pop_size = 64
+    optimizer.n_cores = -4
 
 # %% [markdown]
 # ## Run Optimization
 
 # %%
-optimization_results = optimizer.optimize(optimization_problem, use_checkpoint=False)
+if __name__ == "__main__":
+    optimization_results = optimizer.optimize(optimization_problem, use_checkpoint=False)
 
 # %% [markdown]
 # ### Optimization Progress and Results
@@ -371,20 +373,23 @@ optimization_results = optimizer.optimize(optimization_problem, use_checkpoint=F
 # For example, the attributes `x` and `f` contain the final value(s) of parameters and the objective function.
 
 # %%
-print(optimization_results.x)
-print(optimization_results.f)
+if __name__ == "__main__":
+    print(optimization_results.x)
+    print(optimization_results.f)
 
 # %% [markdown]
 # After optimization, several figures can be plotted to vizualize the results. For example, the convergence plot shows how the function value changes with the number of evaluations.
 
 # %%
-optimization_results.plot_convergence()
+if __name__ == "__main__":
+    optimization_results.plot_convergence()
 
 # %% [markdown]
 # The plot_objectives method shows the objective function values of all evaluated individuals. Here, lighter color represent later evaluations. Note that by default the values are plotted on a log scale if they span many orders of magnitude. To disable this, set autoscale=False.
 
 # %%
-optimization_results.plot_objectives()
+if __name__ == "__main__":
+    optimization_results.plot_objectives()
 
 # %% [markdown]
 # All figures are saved automatically in the `working_directory`.

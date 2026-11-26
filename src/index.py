@@ -15,7 +15,8 @@
 
 # %% [markdown]
 # (chrom_system_characterization)=
-# # Characterization of Chromatographic System: Modeling Periphery, Transport, and Binding Parameters
+# # Characterization of Chromatographic System
+# ## Modeling Periphery, Transport, and Binding Parameters
 #
 # To accurately model a chromatographic system in **CADET-Process**, several steps are necessary.
 # First, the system periphery, including components such as tubing and valves, must be characterized to account for any dead volumes that may cause time shifts in the signal, as well as dispersion that can lead to peak broadening
@@ -27,8 +28,8 @@
 # ```{toctree}
 # :maxdepth: 1
 #
-# system_periphery
 # column_transport_parameters
-# particle_porosity
+# pore_transport
 # binding_model_parameters
+# Yamamoto_method
 # ```

@@ -16,15 +16,27 @@
 # %% [markdown]
 # # Fit Pore Transport Parameters
 #
-# Pore transport is an important consideration in the modeling of chromatography. The speed in which a tracer is able to pass through the column is dependent on its interaction with the stationary phase. The `particle_porosity` is a chemical property of the beads in the stationary phase. The tracer in the mobile phase must be able to penetrate the pores to interact with the stationary phase. This external mass transfer between bulk volume and particles pores is called `film diffusion`. After entering the pore the tracer is considered to be in the stagnant mobile phase.
+# The system we characterize in this example uses a porous stationary phase, such as beads made of cross-linked agarose.
+# This means that there exists a stagnant liquid phase within the stationary phase and components can diffuse into and out of this stagnant liquid phase. The tracer in the mobile phase must be able to penetrate the pores to interact with the stationary phase.
 #
-# One approach to determine parameters like `particle_porosity` and `film diffusion` is the inverse method. By adjusting the values of the parameters in the simulation model and comparing the resulting behavior to the experimental data, the optimal parameter values that match the observed behavior can be found.
+# In this example we will use the [Lumped Rate Model with Pores](https://cadet.github.io/master/modelling/unit_operations/lumped_rate_model_with_pores.html#lumped-rate-model-with-pores-model) to describe the pore transport. Within this model, two parameters characterize the pore transport:
+#
+# - The `particle_porosity` describes the ratio of liquid phase volume within the stationary phase to total volume of the stationary phase.
+# - The `film_diffusion` desribes the diffusion speed with which components diffuse into and out of the stagnant liquid phase.
+#
+# One approach to determine these parameters is the inverse method.
+# By adjusting the values of the parameters in the simulation model and comparing the resulting behavior to the experimental data, the optimal parameter values that match the observed behavior can be found.
 #
 # ## Experiment
 #
-# To fit the pore transport parameters an experiment is conducted with acetone as a pore penetrating tracer. The tracer is injected into the column and its concentration at the column outlet is measured and compared to the concentration predicted by simulation results.
-# - Acetone (pore penetrating tracer './experimental_data/pore_penetrating_tracer.csv')
-# - data: time / s and c / mM
+# To fit the pore transport parameters an experiment is conducted with a pore-penetrating tracer.
+# The tracer is injected into the column and its concentration at the column outlet is measured.
+#
+# In this example, acetone is used as a non-binding, pore-penetrating tracer for a hypothetical ion exchange column.
+# This is useful if the column is to be used to separate small molecules.
+# If the target molecules are large molecules, such as proteins, it can be advisable to perform the pore-penetrating tracer experiment using the target proteins under non-binding conditions, such as with a buffer with a high salt concentration for ion exchange chromatography.
+#
+# The acetone data is stored in './experimental_data/pore_penetrating_tracer.csv' as time in seconds and concentration in mM.
 
 # %%
 import numpy as np
@@ -44,8 +56,7 @@ if __name__ == "__main__":
 # %% [markdown]
 # ## Reference Model
 #
-# Here, initial values for `axial_dispersion` and `bed_porosity` are assumed. The optimization of these parameters can be performed with the simulation of a non-pore-penetrating tracer as described in [Fit Column Transport Parameters] (./column_transport_parameters.md) .
-# The `particle_porosity` and  `film_diffusion`  will later be optimized, thus arbitrary values can be set for now. `film_diffusion` is set to a value > 0 m/s to allow for the tracer to enter the pores. In the `LumpedRateModelWithPores` pore diffusion is neglegted. The only mass transport inside the particle considered is the `film diffusion`.
+# Here, initial values for `film_diffusion` and `particle_porosity` are assumed, as they will later be optimized, thus arbitrary values (within reason) can be set for now. `film_diffusion` is set to a value > 0 m/s to allow for the tracer to enter the pores. `particle_porosity` is set to a value between 0 and 1.
 
 # %%
 from CADETProcess.processModel import ComponentSystem
@@ -70,8 +81,8 @@ column.particle_radius = 34e-6
 column.axial_dispersion = 1e-8
 column.bed_porosity = 0.3
 
-column.particle_porosity = 0.8
-column.film_diffusion = [1]
+column.particle_porosity = 0.5
+column.film_diffusion = [1e-5]
 
 outlet = Outlet(component_system, name="outlet")
 
@@ -150,15 +161,15 @@ optimization_problem.add_evaluation_object(process)
 optimization_problem.add_variable(
     name="particle_porosity",
     parameter_path="flow_sheet.column.particle_porosity",
-    lb=0.5,
-    ub=0.99,
+    lb=0.3,
+    ub=0.8,
     transform="auto",
 )
 optimization_problem.add_variable(
     name="film_diffusion",
     parameter_path="flow_sheet.column.film_diffusion",
-    lb=0.001,
-    ub=0.99,
+    lb=1e-6,
+    ub=1e-2,
     transform="auto",
 )
 
@@ -186,9 +197,9 @@ optimization_problem.add_callback(callback, requires=[simulator])
 from CADETProcess.optimization import U_NSGA3
 
 optimizer = U_NSGA3()
-optimizer.n_max_gen = 3
-optimizer.pop_size = 3
-optimizer.n_cores = 3
+optimizer.n_max_gen = 30
+optimizer.pop_size = 32
+optimizer.n_cores = -4
 
 # %% [markdown]
 # ## Run Optimization
